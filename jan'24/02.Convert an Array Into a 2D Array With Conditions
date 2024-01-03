@@ -1,0 +1,24 @@
+class Solution {
+    public List<List<Integer>> findMatrix(int[] nums) {
+        List<List<Integer>> ans = new ArrayList<>();
+        Map<Integer, Integer> map = new HashMap<>();
+        for (int i = 0; i < nums.length; i++) {
+            map.put(nums[i], map.getOrDefault(nums[i], 0) + 1);
+        }
+        while (!map.isEmpty()) {
+            List<Integer> temp = new ArrayList<>();
+            Iterator<Map.Entry<Integer, Integer>> iterator = map.entrySet().iterator();
+            while (iterator.hasNext()) {
+                Map.Entry<Integer, Integer> entry = iterator.next();
+                temp.add(entry.getKey());
+                if (entry.getValue() == 1) {
+                    iterator.remove();
+                } else {
+                    entry.setValue(entry.getValue() - 1);
+                }
+            }
+            ans.add(temp);
+        }
+        return ans;
+    }
+}
