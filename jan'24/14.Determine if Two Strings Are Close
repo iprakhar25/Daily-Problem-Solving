@@ -1,0 +1,36 @@
+class Solution {
+    public boolean closeStrings(String word1, String word2) {
+        HashMap<Character, Integer> map1 = new HashMap<>();
+        HashMap<Character, Integer> map2 = new HashMap<>();
+        HashSet<Character> set = new HashSet<>();
+        for(int i=0;i<word1.length();i++){
+            char ch = word1.charAt(i);
+            map1.put(ch, map1.getOrDefault(ch, 0)+1);
+            set.add(ch);
+        }
+        for(int i=0;i<word2.length();i++){
+            char ch = word2.charAt(i);
+            map2.put(ch, map2.getOrDefault(ch, 0)+1);
+            set.remove(ch);
+        }
+        if(set.size()!=0)   return false;
+        int arr1[] = new int[map1.size()];
+        int arr2[] = new int[map2.size()];
+        int i = 0;
+        for(Map.Entry x:map1.entrySet()){
+            arr1[i++] = (int)x.getValue();
+        }
+        i = 0;
+        for(Map.Entry x:map2.entrySet()){
+            arr2[i++] = (int)x.getValue();
+        }
+        Arrays.sort(arr1);
+        Arrays.sort(arr2);
+        for(i = 0;i<arr1.length;i++){
+            if(arr1[i]!=arr2[i])
+                return false;
+        }
+
+        return true;
+    }
+}
