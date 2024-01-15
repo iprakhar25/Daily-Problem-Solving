@@ -1,0 +1,45 @@
+class Solution {
+    public List<List<Integer>> findWinners(int[][] matches) {
+        HashSet<Integer> noLoss = new HashSet<>();
+        HashSet<Integer> oneLoss = new HashSet<>();
+        HashSet<Integer> useless = new HashSet<>();
+        int n = matches.length;
+        for(int i =0;i<n;i++){
+            int won = matches[i][0];
+            int lost = matches[i][1];
+            noLoss.add(won);
+            noLoss.add(lost);
+            boolean b = useless.contains(lost);
+            if(!oneLoss.contains(lost)&&(!b)){
+                oneLoss.add(lost);
+            }else{
+                oneLoss.remove(lost);
+                useless.add(lost);
+            }
+        }
+        for(int x:oneLoss){
+            noLoss.remove(x);
+        }
+        for(int x:useless){
+            noLoss.remove(x);
+        }
+
+        List<List<Integer>> ans = new ArrayList<>();
+        List<Integer> list1 = new ArrayList<>();
+        for(int x:noLoss){
+            list1.add(x);
+        }
+        Collections.sort(list1);
+        ans.add(list1);
+        List<Integer> list2 = new ArrayList<>();
+        for(int x:oneLoss){
+            list2.add(x);
+        }
+        Collections.sort(list2);
+        ans.add(list2);
+
+
+
+        return ans;
+    }
+}
