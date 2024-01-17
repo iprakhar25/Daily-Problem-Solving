@@ -1,0 +1,16 @@
+class Solution {
+    public boolean uniqueOccurrences(int[] arr) {
+        HashMap<Integer, Integer> map = new HashMap<>();
+        for(int x:arr){
+            map.put(x, map.getOrDefault(x, 0)+1);
+        }
+        List<Integer> list = new ArrayList<>();
+        for(Map.Entry x : map.entrySet()){
+            int a = (int)x.getValue();
+            if(!list.contains(a))
+                list.add(a);
+            else   return false;
+        }
+        return true;
+    }
+}
