@@ -1,0 +1,23 @@
+class Solution {
+    public int[] findErrorNums(int[] nums) {
+        int n = nums.length;
+        int ans[] = new int[2];
+        int realsum = n*(n+1)/2;
+        int arraysum = 0;
+        int setsum = 0;
+        HashSet<Integer> set = new HashSet<>();
+
+        for(int x:nums){
+            arraysum += (int)x;
+            set.add((int)x);
+        }
+        for(int x:set){
+            setsum += (int)x;
+        }
+
+        ans[0] = arraysum-setsum;
+        ans[1] = realsum-setsum;
+
+        return ans;
+    }
+}
