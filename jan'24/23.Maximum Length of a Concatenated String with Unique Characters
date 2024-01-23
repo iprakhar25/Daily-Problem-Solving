@@ -1,0 +1,26 @@
+class Solution {
+    public int maxLength(List<String> arr) {
+        return function(0, arr, "");
+    }
+    int function(int index, List<String> arr, String s){
+        if(index==arr.size())
+            return s.length();
+        
+        String a = arr.get(index);
+        int nottake = function(index+1, arr, s);
+        int take = 0;
+        if(check(s,a))
+            take = function(index+1, arr, s+a);
+
+        return Math.max(nottake, take);
+    }
+    boolean check(String s, String a){
+        for(int i = 0;i<a.length();i++){
+            if(s.indexOf(a.charAt(i))>=0)
+                return false;
+            else
+                s += a.charAt(i);
+        }
+        return true;
+    }
+}
