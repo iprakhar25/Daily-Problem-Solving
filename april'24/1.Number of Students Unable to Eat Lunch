@@ -1,0 +1,29 @@
+class Solution {
+    public int countStudents(int[] students, int[] sandwiches) {
+        int n = sandwiches.length;
+        int s1=0;
+        int s0=0;
+        for(int x: students){
+            if(x==1)
+                s1++;
+            else
+                s0++;
+        }
+        for(int x: sandwiches){
+            if(x==1)
+            {
+                if(s1>0)
+                    s1--;
+                else
+                    break;
+            }
+            else{
+                if(s0>0)
+                    s0--;
+                else
+                    break;
+            }
+        }
+        return s1+s0;
+    }
+}
